@@ -1,0 +1,20 @@
+plugins {
+    id "com.github.jruby-gradle.base" version "0.1.11"
+}
+
+import com.github.jrubygradle.JRubyExec
+
+if (System.env.JRUBY == '9k') {
+    jruby.execVersion = '9.0.0.0.pre1'
+}
+
+dependencies {
+    jrubyExec 'rubygems:activesupport:4.2.0+'
+    jrubyExec 'rubygems:rspec:3.+'
+}
+
+task spec(type: JRubyExec) {
+    description "Execute RSpec examples"
+    jrubyArgs '-S'
+    script 'rspec'
+}
